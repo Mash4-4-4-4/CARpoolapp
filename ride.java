@@ -1,23 +1,47 @@
-package backend;
+package carpool;
 
-public class ride {
-		int id;
-		String source;
-		String destination;
-		int seats;
-		double fare;
-		int available_seats;
-		int total_seats;
-		user user;
-		public ride(int id,String source, String destination, int seats, double fare) {
-			this.source = source;
-			this.destination = destination;
-			this.seats = seats;
-			this.fare = fare;
-		}
-		@Override
-		public String toString() {
-			return "ride [id=" + id + ", source=" + source + ", destination=" + destination + ", seats=" + seats
-					+ ", fare=" + fare + "]";
-		}
+public class Ride
+{
+	int rideId;
+	String source;
+	String destination;
+	int availSeats;
+	double price;
+	Ride(String source,String destination,double price,int rideId,int availSeats)
+	{
+		this.source=source;
+		this.destination=destination;
+		this.rideId=rideId;
+		this.availSeats=availSeats;
+		this.price=price;
 	}
+	public boolean matches(String src,String dest)
+	{
+		return source.equalsIgnoreCase(src)&&destination.equalsIgnoreCase(dest);
+		
+	}
+	public boolean cabbook(int seats)
+	{
+		return availSeats>=seats;
+	}
+	public void bookSeats(int seats)
+	{
+		availSeats--;
+	}
+	public double totprice(int seats)
+	{
+		return seats*price;
+	}
+	public int getrideid()
+	{
+		return rideId;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "ride [ride_id=" + rideId + ", source=" + source + ", destination=" + destination + ", seats=" + availSeats
+				+ ", fare=" + price + "]";
+	}
+
+}
