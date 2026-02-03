@@ -1,35 +1,61 @@
-package backend;
+package carpool;
+
 import java.util.ArrayList;
 import java.util.List;
-public class RideBooking {
-	List<user> userlist = new ArrayList<>();
-	
-	public user login(String email, String password)
-	{ 
-		for(user user:userlist)
+
+public class RideBooking 
+{
+	private ArrayList<User>users=new ArrayList<>();
+	private ArrayList<Ride>rides=new ArrayList<>();
+	private ArrayList<Booking>bookings=new ArrayList<>();
+      
+	public User signin(String email,String password)
+	{
+		for(User u : users)
 		{
-			if(user.email==email&&user.password==password)
+			if(u.getEmail().equals(email)&&u.checkpswd(password))
 			{
-				System.out.println("user created");
-				return user;
+				return u;
 			}
 		}
 		return null;
-
+	}
+	public User Register(String name,String email,String password)
+	{
+		int user_id=users.size()+1;
+		User user=new User(name,email,password,user_id);
+		users.add(user);
+		return user;
 	}
 	
-	 public user signup(int user_id, String name, String email, String password) {
-	        user user = new user(user_id, name, email, password);
-	        userlist.add(user);
-	        return user;
-	 }
-		public List<ride> rideList=new ArrayList<>();
-		public void createRide(int id,String source, String destination,int seats,double fare){
-			ride ride1 =new ride(id,source,destination,seats,fare);
-			rideList.add(ride1);
-		}
-		public List<ride> showAllRides(){
-			return rideList;
-		}
+	public void addRide(Ride ride)
+	{
+		rides.add(ride);
 	}
-
+	public List<Ride> searchrides(String source,String destination,int seats)
+	{
+		List<Ride>result=new ArrayList<>();
+		for(Ride r:rides)
+		{
+			if(r.matches(source, destination)&&r.cabbook(seats))
+				result.add(r);		
+			}
+		return result;
+	}
+	
+	public Booking bookRide(User user,Ride ride,int seats)
+	{
+		if(!ride.cabbook(seats))
+		{
+			System.out.println("seats not available");
+			return null;
+		}
+		ride.bookSeats(seats);
+		double price=ride.totprice(seats);
+		
+		Booking booking =new Booking(bookings.size()+1,
+				user,ride,seats,price);
+		bookings.add(booking);
+		return booking;
+	}
+}
