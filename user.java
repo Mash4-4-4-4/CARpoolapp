@@ -1,20 +1,39 @@
-package backend;
-public class user
+package carpool;
+
+public class User 
 {
-	String email;
 	String name;
+	String email;
+	int UserId;
 	String password;
-	int user_id;
-	public user(int user_id, String name,String email, String password) {
-		super();
-		this.email = email;
-		this.name = name;
-		this.password = password;
-		this.user_id = user_id;
+	User(String name,String email,String password,int UserId)
+	{
+		this.name=name;
+		this.email=email;
+		this.password=password;
+		this.UserId=UserId;
 	}
-	@Override
-	public String toString() {
-		return "user [email=" + email + ", name=" + name + ", password=" + password + ", user_id=" + user_id + "]";
+	String getEmail()
+	{
+		return email;
+	}
+	String getName()
+	{
+		return name;
+	}
+	int getUserId()
+	{
+		return UserId;
+	}
+	boolean checkpswd(String password)
+	{
+		return this.password.equals(password);
+	}
+	
+	@Override 
+	public String toString()
+	{
+		return "user[email="+email+",name="+name+",user_id="+UserId+"]";
 	}
 	
 
