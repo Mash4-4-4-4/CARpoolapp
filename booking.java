@@ -1,25 +1,27 @@
-package backend;
-public class booking 
-{
-	int booking_id;
-	ride ride;
-	user user;
-	int seat_booked;
-	double total_fare;
-	public booking(int booking_id, ride ride, user user, int seat_booked, double total_fare) {
-		super();
-		this.booking_id = booking_id;
-		this.ride = ride;
-		this.user = user;
-		this.seat_booked = seat_booked;
-		this.total_fare = total_fare;
-	}
-	@Override
-	public String toString() {
-		return "booking [booking_id=" + booking_id + ", seat_booked=" + seat_booked + ", total_fare=" + total_fare
-				+ "]";
-	}
-	
-	
+package carpool;
 
+public class Booking 
+{
+ int bookingId;
+ Ride ride;
+ User user;
+ int seatsbooked;
+ double totprice;
+ Booking(int bookingId,User user,Ride ride,int seatsbooked,double totprice)
+ {
+	 this.bookingId=bookingId;
+	 this.user=user;
+	 this.ride=ride;
+	 this.seatsbooked=seatsbooked;
+	 this.totprice=totprice;
+ }
+ @Override
+ public String toString()
+ {
+	 return "Booking[bookingid:"+bookingId+
+			 ",user:"+user.getName()+
+			 ",rideid"+ride.getrideid()+
+			 ",seats:"+seatsbooked+
+			 ",totalroce"+totprice+"]";
+ }
 }
